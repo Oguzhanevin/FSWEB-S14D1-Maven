@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue; // Bu satır eklendi
 
 @ExtendWith(ResultAnalyzer.class)
 public class MainTest {
@@ -32,8 +32,8 @@ public class MainTest {
     @BeforeEach
     void setUp() {
         circle = new Circle(2);
-        cylinder = new Cylinder(2,2);
-        rectangle = new Rectangle(1,2);
+        cylinder = new Cylinder(2, 2);
+        rectangle = new Rectangle(1, 2);
         cuboid = new Cuboid(1, 2, 3);
         employee = new Employee(1, "Jane Doe", 20000);
         hrManager = new HRManager(1, "John Doe", 120000);
@@ -100,7 +100,9 @@ public class MainTest {
     @DisplayName("getArea methodu Rectangle sınıfında doğru çalışıyor mu?")
     @Test
     public void testGetAreaRectangle() throws NoSuchFieldException {
-        assertEquals(String.format("%.2f", rectangle.getArea()), "2.00");
+        // Formatlamayı yapıp noktayı virgülle değiştirebiliriz
+        String formattedArea = String.format("%.2f", rectangle.getArea()).replace('.', ',');
+        assertEquals(formattedArea, "2,00");
     }
 
     @DisplayName("Cuboid sınıf değişkenleri doğru access modifier a sahip mi ?")
@@ -150,7 +152,5 @@ public class MainTest {
         assertThat(midDeveloper, instanceOf(Employee.class));
         assertThat(seniorDeveloper, instanceOf(Employee.class));
     }
-
-
-
 }
+
